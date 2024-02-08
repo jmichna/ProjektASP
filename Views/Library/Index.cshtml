@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ProjektASP.Models.Library>
+
+@{
+    ViewData["Title"] = "Lista Książek";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">Dodaj nową książkę</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Ilość stron</th>
+            <th>ISBN</th>
+            <th>Data wydania</th>
+            <th>Wydawnictwo</th>
+            <th>Ocena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var library in Model)
+        {
+            <tr>
+                <td>@library.Title</td>
+                <td>@library.Autor</td>
+                <td>@library.PageNumber</td>
+                <td>@library.ISBN</td>
+                <td>@library.DateOfRelease.ToShortDateString()</td>
+                <td>@library.PublishingHouse</td>
+                <td>@library.Rating</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@library.Id">Szczegóły</a> |
+                    <a asp-action="Edit" asp-route-id="@library.Id">Edytuj</a> |
+                    <a asp-action="Delete" asp-route-id="@library.Id">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
