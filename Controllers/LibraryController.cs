@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjektASP.Models;
 
 namespace ProjektASP.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LibraryController : Controller
     {
         private readonly ILibraryService _libraryService;
@@ -13,6 +15,7 @@ namespace ProjektASP.Controllers
             _libraryService = libraryService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var libraries = _libraryService.GetAllLibraries();

@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Data.Entities
+{
+    public class PublishingHouseEntity
+    {
+        public int Id { get; set; }
+        public string PublishingHouseName { get; set; }
+        public string Region { get; set; }
+        public Address? Address {  get; set; }
+
+        public int AddressId { get; set; }
+        public ISet<LibraryEntity> Library { get; set; }
+    }
+
+    public class Address
+    {
+        public int Id { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string PostalCode { get; set; }
+        public string Region { get; set; }
+        public ISet<PublishingHouseEntity> PublishingHouseEntity { get; set; }
+    }
+}

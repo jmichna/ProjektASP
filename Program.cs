@@ -1,6 +1,8 @@
 using ProjektASP.Models;
 using Data.Entities;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjektASP
 {
@@ -9,12 +11,20 @@ namespace ProjektASP
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
 
             // Add services to the container.
+            builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
             //builder.Services.AddSingleton<ILibraryService, MemoryLibraryService>();
             builder.Services.AddDbContext<AppDbContext>();
+
+            builder.Services.AddDefaultIdentity<IdentityUser>()
+                            .AddRoles<IdentityRole>()                             
+                            .AddEntityFrameworkStores<Data.Entities.AppDbContext>();
             builder.Services.AddTransient<ILibraryService, EFLibraryService>();
+            builder.Services.AddMemoryCache();                        
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -31,7 +41,10 @@ namespace ProjektASP
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",
