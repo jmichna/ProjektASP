@@ -5,7 +5,7 @@ using ProjektASP.Models;
 
 namespace ProjektASP.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public class LibraryController : Controller
     {
         private readonly ILibraryService _libraryService;
@@ -36,12 +36,7 @@ namespace ProjektASP.Controllers
 
         public IActionResult Create()
         {
-            Library model = new Library();
-            model.PublishingHouse = _libraryService
-                .FindAllPublishingHouseForViewModel()
-                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title })
-                .ToList();
-            return View(model);
+            return View(new Library());
         }
 
         [HttpPost]

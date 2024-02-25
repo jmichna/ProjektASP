@@ -9,7 +9,7 @@ namespace ProjektASP.Mappers
         {
             return new Library()
             {
-                Id = entity.Id,
+                Id = entity.LibraryId,
                 Title = entity.Title,
                 Autor = entity.Autor,
                 PageNumber = entity.PageNumber,
@@ -23,7 +23,7 @@ namespace ProjektASP.Mappers
         {
             return new LibraryEntity()
             {
-                Id = model.Id,
+                LibraryId = model.Id,
                 Title = model.Title,
                 Autor = model.Autor,
                 PageNumber = model.PageNumber,

@@ -42,7 +42,7 @@
 
     <div class="form-group">
         <label asp-for="PublishingHouse"></label>
-        <select asp-for="PublishingHouseId" asp-items="@Model.PublishingHouse" class="form-control"></select>
+        <select asp-for="PublishingHouseId" asp-items="@Model.PublishingHouse.PublishingHouseName" class="form-control"></select>
         <span asp-validation-for="PublishingHouse" class="text-danger"></span>
     </div>
 
